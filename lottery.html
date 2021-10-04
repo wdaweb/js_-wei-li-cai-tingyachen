@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottery</title>
+</head>
+
+<body>
+  <script>
+    const rand = (min, max) => {
+      return Math.round(Math.random() * (max - min)) + min
+    }
+
+    const groupA = []
+
+    /***** 方法一 *****/
+    // for (let i = 0; i < 6; i++) {
+    //   // 隨機取一個數
+    //   const num = rand(1, 38)
+    //   if (groupA.includes(num)) {
+    //     // 如果重複了，這次迴圈再跑一次
+    //     i--
+    //   } else {
+    //     // 如果沒有重複，放進 A 組陣列
+    //     groupA.push(num)
+    //   }
+    // }
+
+    /***** 方法二 *****/
+    // 取到陣列滿 6 個為止
+    // while(groupA.length < 6) {
+    //   // 隨機一個數
+    //   const num = rand(1, 38)
+    //   // 不重複就放入陣列
+    //   if (!groupA.includes(num)) {
+    //     groupA.push(num)
+    //   }
+    // }
+
+    /***** 方法三 *****/
+    // 建立一個威力彩數字球池
+    const numbers = []
+    // 放入 38 顆球
+    for (let i = 1; i <= 38; i++) {
+      numbers.push(i)
+    }
+    // 從球池取 6 顆球
+    for (let i = 0; i < 6; i++) {
+      // 隨機從數字球池取一個索引
+      const index = rand(0, numbers.length - 1)
+      // 將取到的索引對應的值放入 A 組陣列
+      groupA.push(numbers[index])
+      // 將取到的索引從數字球池移除
+      numbers.splice(index, 1)
+    }
+
+    document.write(groupA.join(', '))
+  </script>
+</body>
+
+</html>
